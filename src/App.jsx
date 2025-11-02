@@ -190,16 +190,18 @@ const VideoCard = ({ video, onClick, user }) => {
   return (
     <>
       <div className="relative group cursor-pointer" onClick={() => onClick(video)}>
-        <img
-          src={
-            imageError
-              ? 'https://placehold.co/300x168/20232a/E50914?text=NO+IMAGE'
-              : thumbnailFor(video)
-          }
-          alt={video.title || 'サムネイル'}
-          className="w-full h-36 object-cover rounded-t-md"
-          onError={() => setImageError(true)}
-        />
+        <div className="w-full aspect-video bg-gray-900 rounded-t-md overflow-hidden">
+          <img
+            src={
+              imageError
+                ? 'https://placehold.co/300x168/20232a/E50914?text=NO+IMAGE'
+                : thumbnailFor(video)
+            }
+            alt={video.title || 'サムネイル'}
+            className="w-full h-full object-cover"
+            onError={() => setImageError(true)}
+          />
+        </div>
 
         <div className="p-4 bg-gray-800 flex flex-col gap-2">
           <div className="flex items-center justify-between">
@@ -908,11 +910,13 @@ const VideoModalList = ({ title, videos, onClose, onVideoClick, user, setHistory
                       onClick={e => e.stopPropagation()}
                     />
                   )}
-                  <img
-                    src={thumbnailFor(video)}
-                    alt={video.title || 'サムネイル'}
-                    className="w-full h-36 object-cover rounded-t-md"
-                  />
+                  <div className="w-full aspect-video bg-gray-900 rounded-t-md overflow-hidden">
+                    <img
+                      src={thumbnailFor(video)}
+                      alt={video.title || 'サムネイル'}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                   <div className="p-3 bg-gray-800 rounded-b-md">
                     <h3 className="text-white font-semibold text-sm truncate">{video.title}</h3>
                     <p className="text-gray-400 text-xs mt-1 truncate">{video.summary}</p>
