@@ -190,11 +190,14 @@ const VideoCard = ({ video, onClick, user }) => {
   return (
     <>
       <div className="relative group cursor-pointer" onClick={() => onClick(video)}>
-        <img 
-          src={thumbnailFor(video)}
+        <img
+          src={
+            imageError
+              ? 'https://placehold.co/300x168/20232a/E50914?text=NO+IMAGE'
+              : thumbnailFor(video)
+          }
           alt={video.title || 'サムネイル'}
-          className="w-full h-48 object-cover rounded-t-md"
-          loading="lazy"
+          className="w-full h-36 object-cover rounded-t-md"
           onError={() => setImageError(true)}
         />
 
@@ -303,6 +306,8 @@ const Header = ({ setSearchTerm, onCategoryChange, user, handleLogout, handleSho
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [currentCategory, setCurrentCategory] = useState("すべて");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // ユーザーメニュー用
+  const [isUserMenuOpen, setUserMenuOpen] = useState(false);
+  const [isCategoryMenuOpen, setCategoryMenuOpen] = useState(false);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
