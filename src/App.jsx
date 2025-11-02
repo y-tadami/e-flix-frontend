@@ -305,9 +305,8 @@ const VideoCard = ({ video, onClick, user }) => {
 const Header = ({ setSearchTerm, onCategoryChange, user, handleLogout, handleShowMyList, handleShowHistory }) => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [currentCategory, setCurrentCategory] = useState("すべて");
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // ユーザーメニュー用
-  const [isUserMenuOpen, setUserMenuOpen] = useState(false);
   const [isCategoryMenuOpen, setCategoryMenuOpen] = useState(false);
+  const [isUserMenuOpen, setUserMenuOpen] = useState(false);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -316,6 +315,7 @@ const Header = ({ setSearchTerm, onCategoryChange, user, handleLogout, handleSho
   const handleCategoryClick = (category) => {
     setCurrentCategory(category);
     onCategoryChange(category);
+    setCategoryMenuOpen(false); // カテゴリ選択時に閉じる
   };
 
   return (
@@ -340,17 +340,17 @@ const Header = ({ setSearchTerm, onCategoryChange, user, handleLogout, handleSho
         {/* モバイル向けカテゴリドロップダウン */}
         <div className="relative md:hidden">
           <button
-            onClick={() => setIsDropdownOpen(p => !p)}
+            onClick={() => setCategoryMenuOpen(p => !p)}
             className="flex items-center text-white text-sm hover:text-gray-300 transition"
           >
             {currentCategory} <ChevronDown size={16} className="ml-1 transition-transform" />
           </button>
-          {isDropdownOpen && (
+          {isCategoryMenuOpen && (
              <div className="absolute left-0 mt-2 w-48 bg-black border border-gray-700 rounded shadow-lg z-50">
                 {categories.map(category => (
                     <button
                         key={category.key}
-                        onClick={() => { handleCategoryClick(category.key); setIsDropdownOpen(false); }}
+                        onClick={() => handleCategoryClick(category.key)}
                         className={`block w-full text-left px-4 py-2 text-sm transition ${currentCategory === category.key ? 'text-red-600 font-bold' : 'text-white hover:bg-gray-800'}`}
                     >
                         {category.label}
@@ -366,13 +366,13 @@ const Header = ({ setSearchTerm, onCategoryChange, user, handleLogout, handleSho
         <div className="relative">
           <div 
              className="flex items-center cursor-pointer"
-             onClick={() => setIsDropdownOpen(p => !p)}
+             onClick={() => setUserMenuOpen(p => !p)}
           >
             <User size={28} className="text-white border-2 border-white rounded-full p-1" />
             <ChevronDown size={16} className="text-white ml-1" />
           </div>
           {/* ユーザーメニュー */}
-          {isDropdownOpen && (
+          {isUserMenuOpen && (
              <div className="absolute right-0 mt-2 w-48 bg-black border border-gray-700 rounded shadow-lg z-50">
                 <div className="px-4 py-3 border-b border-gray-700 text-white truncate">
                     <p className="text-xs text-gray-400">ログインユーザー</p>
