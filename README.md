@@ -1,16 +1,60 @@
-# React + Vite
+# E-FLIX Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+E-FLIXは、社内向けの講義動画プラットフォームです。  
+このリポジトリはフロントエンド（React + Vite）プロジェクトです。
 
-Currently, two official plugins are available:
+## 主な機能
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Googleアカウント（@estyle-inc.jp）による認証
+- 講義動画の一覧・検索・カテゴリ表示
+- マイリスト・視聴履歴管理
+- Firebaseによるデータ管理
+- FlaskバックエンドAPIとの連携
 
-## React Compiler
+## セットアップ手順
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. リポジトリをクローン
 
-## Expanding the ESLint configuration
+    ```bash
+    git clone <このリポジトリのURL>
+    cd e-flix-frontend
+    ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+2. 依存パッケージのインストール
+
+    ```bash
+    npm install
+    ```
+
+3. `.env` ファイルを作成し、必要な環境変数を設定  
+   （例: FirebaseのAPIキーやAPIエンドポイント）
+
+4. 開発サーバーの起動
+
+    ```bash
+    npm run dev
+    ```
+
+## 環境変数（.env例）
+
+```env
+VITE_FIREBASE_API_KEY="..."
+VITE_FIREBASE_AUTH_DOMAIN="..."
+VITE_FIREBASE_PROJECT_ID="..."
+VITE_FIREBASE_STORAGE_BUCKET="..."
+VITE_FIREBASE_MESSAGING_SENDER_ID="..."
+VITE_FIREBASE_APP_ID="..."
+VITE_ALLOWED_DOMAIN="@estyle-inc.jp"
+VITE_API_URL="http://127.0.0.1:5000/api/videos"
+```
+
+## その他
+
+- 本番環境用には`.env.production`を利用してください。
+- `.env`ファイルはGit管理対象外です。
+
+---
+
+## ライセンス
+
+社内利用限定
