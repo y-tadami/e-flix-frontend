@@ -198,7 +198,7 @@ const VideoCard = ({ video, onClick, user }) => {
                 : thumbnailFor(video)
             }
             alt={video.title || 'サムネイル'}
-            className="w-full h-full object-cover"
+            className="w-full h-36 object-cover rounded-t-md"
             // onError={() => setImageError(true)}  ← これを一時的に外す
           />
         </div>
@@ -914,7 +914,7 @@ const VideoModalList = ({ title, videos, onClose, onVideoClick, user, setHistory
                     <img
                       src={thumbnailFor(video)}
                       alt={video.title || 'サムネイル'}
-                      className="w-full h-full object-cover"
+                      className="w-full h-36 object-cover rounded-t-md"
                     />
                   </div>
                   <div className="p-3 bg-gray-800 rounded-b-md">
