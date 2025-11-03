@@ -1,57 +1,58 @@
 # E-FLIX Frontend
 
-E-FLIXは、社内向けの講義動画プラットフォームです。  
-このリポジトリはフロントエンド（React + Vite）プロジェクトです。
+E-FLIXは、社内向けの講義動画プラットフォームです。
 
-## 主な機能
 
-- Googleアカウント（@estyle-inc.jp）による認証
-- 講義動画の一覧・検索・カテゴリ表示
-- マイリスト・視聴履歴管理
-- Firebaseによるデータ管理
-- FlaskバックエンドAPIとの連携
+---
 
-## セットアップ手順
+## 利用方法
 
-1. リポジトリをクローン
+1. 上記URLにアクセス
+2. 「Googleでサインイン」ボタンから@estyle-inc.jpアカウントでログイン
+3. 講義動画の一覧や検索、カテゴリ機能などを利用
 
-    ```bash
-    git clone <このリポジトリのURL>
-    cd e-flix-frontend
-    ```
+---
 
-2. 依存パッケージのインストール
+## 注意事項
 
-    ```bash
-    npm install
-    ```
+- サインインには@estyle-inc.jpのGoogleアカウントが必要です
+- バックエンドはRenderのFreeプランで運用しているため、15分間アクセスがないとサーバーがスリープします（復帰時は最初のアクセスが遅くなります）
+- サムネイル画像はFirebase Storageで管理しています
 
-3. `.env` ファイルを作成し、必要な環境変数を設定  
-   （例: FirebaseのAPIキーやAPIエンドポイント）
+---
 
-4. 開発サーバーの起動
+## よくある質問
 
-    ```bash
-    npm run dev
-    ```
+- **Q. ログインできない場合は？**  
+  → Google認証の承認済みドメインに本番URLが追加されているか、@estyle-inc.jpアカウントでログインしているかご確認ください。
 
-## 環境変数（.env例）
+- **Q. 動画が表示されない場合は？**  
+  → サーバーがスリープから復帰中の可能性があります。1分ほど待ってから再度お試しください。
 
-```env
-VITE_FIREBASE_API_KEY="..."
-VITE_FIREBASE_AUTH_DOMAIN="..."
-VITE_FIREBASE_PROJECT_ID="..."
-VITE_FIREBASE_STORAGE_BUCKET="..."
-VITE_FIREBASE_MESSAGING_SENDER_ID="..."
-VITE_FIREBASE_APP_ID="..."
-VITE_ALLOWED_DOMAIN="@estyle-inc.jp"
-VITE_API_URL="http://127.0.0.1:5000/api/videos"
-```
+---
 
-## その他
+## 最新講義の追加手順
 
-- 本番環境用には`.env.production`を利用してください。
-- `.env`ファイルはGit管理対象外です。
+1. **サムネイル画像をFirebase Storageにアップロード**
+    - [Firebaseコンソール](https://console.firebase.google.com/)でStorageを開き、「ファイルをアップロード」から画像をアップロード
+    - アップロード後、画像をクリックし「ダウンロードURL」をコピー
+
+2. **Googleスプレッドシートに講義情報を追加**
+    - 管理用Googleスプレッドシートを開く
+    - 新しい行に講義情報（タイトル、説明、日付、カテゴリなど）を入力
+    - `thumbnail`列に先ほどコピーしたFirebase StorageのダウンロードURLを貼り付ける
+
+3. **反映確認**
+    - フロントエンド（E-FLIXアプリ）をリロード
+    - 新しい講義が一覧に表示され、サムネイル画像も正しく表示されているか確認
+
+---
+
+## 開発・運用メモ
+
+- コード修正時はGitHubへpushするとVercelで自動デプロイされます
+- サムネイル画像はGoogleドライブではなくFirebase Storageを利用してください
+- バックエンドやスプレッドシートの仕様変更時はREADMEも更新してください
 
 ---
 
