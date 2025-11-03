@@ -199,7 +199,7 @@ const VideoCard = ({ video, onClick, user }) => {
             }
             alt={video.title || 'サムネイル'}
             className="w-full h-36 object-cover rounded-t-md"
-            // onError={() => setImageError(true)}
+            onError={() => setImageError(true)}
           />
         </div>
 
